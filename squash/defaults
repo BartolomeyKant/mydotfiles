@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# ---- GENERAL DEFAULTS ----
+
+# Paths
+CURR_DIR="${HOME}/.config/squash"
+CACHE_DIR="${HOME}/.cache/squash"
+THEME_DIR="${HOME}/.config/squash/themes"
+BAR_DIR="${HOME}/squash/bar"
+DUNST_PATH="${HOME}/.config/dunst/dunstrc"
+
+# ---- ENABLED MODULES ----
+
+RELOAD_TERMINALS=YES
+RELOAD_WALLPAPER=NO
+RELOAD_BAR=YES
+RELOAD_WM=YES #NOTE: if wm is 2bwm, modifies config files
+RELOAD_VIM=NO # NOTE: Modifies config files
+RELOAD_DUNST=YES #NOTE: Modifies config files
+
+WRITE_ALL=true
+
+BAR_SCRIPT=${HOME}/.local/autostart/polybar.sh
+EXTERNAL_SCRIPT=${HOME}/.config/squash/after_change

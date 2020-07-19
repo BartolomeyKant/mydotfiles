@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# DEFINE COLORS
+BG="#ebeae0"
+FG="#3c3836"
+
+BLK="#383838"
+RED="#fb4934"
+GRN="#78770a"
+YLW="#c77901"
+BLU="#357578"
+MAG="#b16286"
+CYN="#689d6a"
+WHT="#fbf7f1"
+
+BBLK="#282828"
+BRED="#fb4934"
+BGRN="#78770a"
+BYLW="#c77901"
+BBLU="#458588"
+BMAG="#b16286"
+BCYN="#689d6a"
+BWHT="#bbb7b1"
+
+# ROFI OPTIONS
+ACC="${RED}"
+
+DUNST_BACK=${BG}
+DUNST_FG=${FG}
+
+# WALLPAPER OPTIONS
+WALLPAPER_PATH="$HOME/Pictures/backgrounds/light/current_bg"
+WALLPAPER_STYLE="fill"
+
+VSCODE_THEME="Dusty Light MDN"
+
+BERRY_FBC=${RED:1}
+BERRY_UBC=${CYN:1}
+
+BERRY_TEXT_FC=${WHT:1}
+BERRY_TEXT_UC=${FG:1}
+
+FISH_USER="#2f7f00"
+FISH_CWD="#4585cf"
+FISH_GIT="#9f75cf"
+
+FISH_THEME="#$HOME/.config/squash/fish/light"

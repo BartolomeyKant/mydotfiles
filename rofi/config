@@ -1,0 +1,2 @@
+rofi.theme: .config/rofi/current.theme
+rofi.theme: /usr/share/rofi/themes/Arc-Dark.rasi

@@ -1,0 +1,88 @@
+#!/bin/bash
+
+set -e
+
+scripts_dir="~/.config/vbar/scripts"
+cd ~/projects/vbar
+vbar="./vbar "
+
+$vbar add-css --class bar --css "font-family: Hack;"
+$vbar add-css --class bar --css "font-weight: normal;"
+$vbar add-css --class bar --css "font-size: 20px;"
+$vbar add-css --class bar --css "text-shadow: none;"
+$vbar add-css --class bar --css "background-color: #1b202a;"
+# $vbar add-css --class bar --css "border: 0px solid #1b202a;"
+
+$vbar add-css --class block --css "padding-top: 2px;"
+$vbar add-css --class block --css "padding-bottom: 2px;"
+$vbar add-css --class block --css "padding-left: 10px;"
+$vbar add-css --class block --css "padding-right: 10px;"
+$vbar add-css --class block --css "color: #9aa7bd;"
+$vbar add-css --class block --css "background-color: #323c4d;"
+
+$vbar add-css --class menu --css "font-family: Hack;"
+$vbar add-css --class menu --css "font-weight: normal;"
+$vbar add-css --class menu --css "font-size: 20px;"
+$vbar add-css --class menu --css "text-shadow: none;"
+$vbar add-css --class menu --css "background-color: #323c4d;"
+$vbar add-css --class menu --css "color: #9aa7bd;"
+$vbar add-css --class menu --css "border: 10px solid #323c4d;"
+
+$vbar add-css --class "menu :hover" --css "background-color: #232936;"
+$vbar add-css --class "menu :hover" --css "color: #9aa7bd;"
+
+$vbar add-css --class power-off-icon --css "font-family: \"Font Awesome\";"
+$vbar add-css --class power-off-icon --css "background-color: #232936;"
+
+$vbar add-css --class title --css "background-color: #1b202a; font-size: 16px;"
+
+$vbar add-css --class battery-icon --css "font-family: \"Font Awesome\";"
+$vbar add-css --class battery-icon --css "background-color: #232936;"
+
+$vbar add-css --class battery --css "margin-right: 10px;"
+
+$vbar add-css --class volume-icon --css "font-family: \"Font Awesome\";"
+$vbar add-css --class volume-icon --css "background-color: #232936;"
+
+$vbar add-css --class volume --css "margin-right: 10px;"
+
+$vbar add-css --class wireless-icon --css "font-family: \"Font Awesome\";"
+$vbar add-css --class wireless-icon --css "background-color: #232936;"
+
+$vbar add-css --class wireless --css "margin-right: 10px;"
+
+$vbar add-css --class date --css "margin-right: 10px;"
+
+$vbar add-css --class time --css "margin-right: 0px;"
+
+$vbar add-block --left --name power-off-icon --text ""
+
+$vbar add-menu --name power-off-icon --text "Log off" --command "bspc quit"
+$vbar add-menu --name power-off-icon --text "Shut down" --command "systemctl poweroff"
+
+read -r -a desktops <<< $(xprop  -root _NET_DESKTOP_NAMES | sed 's/\(.*\=\)\|\(\,\)\|\("\)//g')
+for desktop in ${!desktops[@]}; do
+	echo $desktop
+	$vbar add-css --class "desktop-$desktop" --css "background-color: #1b202a;"
+	$vbar add-css --class "desktop-$desktop" --css "letter-spacing: 10px;"
+	with_client="⊙"
+	without_client="○"
+	check_clients="$scripts_dir/is_clients_on_desktop.sh $desktop && echo $with_client || echo $without_client"
+	check_desktop="$scripts_dir/is_desktop.sh $desktop"
+	command="$check_desktop && $vbar add-css --class \"desktop-$desktop\" --css \"background-color: #354555\" || $vbar add-css --class \"desktop-$desktop\" --css \"background-color: #1b202a\" && $check_clients"
+
+	$vbar add-block --left --name "desktop-$desktop" --command "$command" --tail-command "$scripts_dir/desktop_spy.sh | while read r; do $vbar update --name \"desktop-$desktop\" ; done" --click-command "wmctrl -s $desktop"
+done
+
+$vbar add-block --center --name title --tail-command "xtitle -s"
+
+$vbar add-block --right --name volume --command "amixer sget Master | grep -P -e '[\d]{1,3}%' -m 1 -o" --click-command "amixer -q sset Master toggle && $vbar update --name volume"
+
+$vbar add-block --right --name battery-icon --text ''
+$vbar add-block --right --name battery --tail-command "while true; do acpi | cut -d, -f2 | sed 's/ //'; sleep 5; done"
+
+$vbar add-block --right --name wireless-icon --text ""
+$vbar add-block --right --name wireless --command "nmcli -t -f TYPE,CONNECTION d | awk -F : '{if(\$2) print(\$2)}'" --interval 5
+
+$vbar add-block --right --name date --command "date +%d/%m" --interval 60
+$vbar add-block --right --name time --command "date +%H:%M" --interval 1

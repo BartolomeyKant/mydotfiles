@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# DEFINE COLORS
+BG="#232c33"
+FG="#f0f0f0"
+
+BLK="#2f353f"
+RED="#C9353f"
+GRN="#68a080"
+YLW="#bfb7a1"
+BLU="#7c9fa6"
+MAG="#BF6C86"
+CYN="#99BFBA"
+WHT="#f0f0f0"
+
+BBLK="#232c33"
+BRED="#99736e"
+BGRN="#78a090"
+BYLW="#bfb7a1"
+BBLU="#7c9fa6"
+BMAG="#aF5c76"
+BCYN="#99BFBA"
+BWHT="#d0d0d0"
+
+# ROFI OPTIONS
+ACC="${YLW}"
+
+# WALLPAPER OPTIONS
+WALLPAPER_PATH="$HOME/Pictures/backgrounds/dark/current_bg"
+WALLPAPER_STYLE="fill"
+
+DUNST_BACK=${BG}
+DUNST_FG=${FG}
+
+VSCODE_THEME="Ayu Mirage Bordered"
+
+BERRY_FBC=${RED:1}
+BERRY_UBC=${CYN:1}
+
+BERRY_TEXT_FC=${WHT:1}
+BERRY_TEXT_UC=${FG:1}
+
+FISH_USER="#559f45"
+FISH_CWD="#35759f"
+FISH_GIT="#df75cf"
+
+FISH_THEME="#$HOME/.config/squash/fish/dark"
