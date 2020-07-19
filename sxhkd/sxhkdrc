@@ -6,8 +6,8 @@ super + Return
 	terminal
 
 # Lock screen
-super + a
-	LockScreen.sh
+#super + a
+#	LockScreen.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
