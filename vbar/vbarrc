@@ -3,8 +3,8 @@
 set -e
 
 scripts_dir="~/.config/vbar/scripts"
-cd ~/projects/vbar
-vbar="./vbar "
+
+vbar=$(which vbar 2> /dev/null || "~/projects/vbar/vbar")
 
 $vbar add-css --class bar --css "font-family: Hack;"
 $vbar add-css --class bar --css "font-weight: normal;"
@@ -62,7 +62,6 @@ $vbar add-menu --name power-off-icon --text "Shut down" --command "systemctl pow
 
 read -r -a desktops <<< $(xprop  -root _NET_DESKTOP_NAMES | sed 's/\(.*\=\)\|\(\,\)\|\("\)//g')
 for desktop in ${!desktops[@]}; do
-	echo $desktop
 	$vbar add-css --class "desktop-$desktop" --css "background-color: #1b202a;"
 	$vbar add-css --class "desktop-$desktop" --css "letter-spacing: 10px;"
 	with_client="⊙"
@@ -76,7 +75,7 @@ done
 
 $vbar add-block --center --name title --tail-command "xtitle -s"
 
-$vbar add-block --right --name volume --command "amixer sget Master | grep -P -e '[\d]{1,3}%' -m 1 -o" --click-command "amixer -q sset Master toggle && $vbar update --name volume"
+$vbar add-block --right --name volume --command "[[ \$($scripts_dir/volume_state.sh) = on ]] && icon='🔉' || icon='🔇' && echo \$icon \$($scripts_dir/volume_val.sh)%" --click-command "amixer -q sset Master toggle && $vbar update --name volume" --interval 5
 
 $vbar add-block --right --name battery-icon --text ''
 $vbar add-block --right --name battery --tail-command "while true; do acpi | cut -d, -f2 | sed 's/ //'; sleep 5; done"
