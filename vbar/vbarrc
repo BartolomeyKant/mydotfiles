@@ -2,19 +2,19 @@
 
 set -e
 
-scripts_dir="~/.config/vbar/scripts"
+scripts_dir="$HOME/.config/vbar/scripts"
 
 vbar=$(which vbar 2> /dev/null || "~/projects/vbar/vbar")
 
 $vbar add-css --class bar --css "font-family: Hack;"
 $vbar add-css --class bar --css "font-weight: normal;"
-$vbar add-css --class bar --css "font-size: 20px;"
+$vbar add-css --class bar --css "font-size: 14px;"
 $vbar add-css --class bar --css "text-shadow: none;"
 $vbar add-css --class bar --css "background-color: #1b202a;"
 # $vbar add-css --class bar --css "border: 0px solid #1b202a;"
 
-$vbar add-css --class block --css "padding-top: 2px;"
-$vbar add-css --class block --css "padding-bottom: 2px;"
+$vbar add-css --class block --css "padding-top: 1px;"
+$vbar add-css --class block --css "padding-bottom: 1px;"
 $vbar add-css --class block --css "padding-left: 10px;"
 $vbar add-css --class block --css "padding-right: 10px;"
 $vbar add-css --class block --css "color: #9aa7bd;"
@@ -22,7 +22,7 @@ $vbar add-css --class block --css "background-color: #323c4d;"
 
 $vbar add-css --class menu --css "font-family: Hack;"
 $vbar add-css --class menu --css "font-weight: normal;"
-$vbar add-css --class menu --css "font-size: 20px;"
+$vbar add-css --class menu --css "font-size: 16px;"
 $vbar add-css --class menu --css "text-shadow: none;"
 $vbar add-css --class menu --css "background-color: #323c4d;"
 $vbar add-css --class menu --css "color: #9aa7bd;"
@@ -34,7 +34,7 @@ $vbar add-css --class "menu :hover" --css "color: #9aa7bd;"
 $vbar add-css --class power-off-icon --css "font-family: \"Font Awesome\";"
 $vbar add-css --class power-off-icon --css "background-color: #232936;"
 
-$vbar add-css --class title --css "background-color: #1b202a; font-size: 16px;"
+$vbar add-css --class title --css "background-color: #1b202a; font-size: 10px;"
 
 $vbar add-css --class battery-icon --css "font-family: \"Font Awesome\";"
 $vbar add-css --class battery-icon --css "background-color: #232936;"
@@ -46,10 +46,8 @@ $vbar add-css --class volume-icon --css "background-color: #232936;"
 
 $vbar add-css --class volume --css "margin-right: 10px;"
 
-$vbar add-css --class wireless-icon --css "font-family: \"Font Awesome\";"
-$vbar add-css --class wireless-icon --css "background-color: #232936;"
-
-$vbar add-css --class wireless --css "margin-right: 10px;"
+$vbar add-css --class net-icon --css "font-family: \"Font Awesome 5 Free\";"
+$vbar add-css --class net --css "margin-right: 10px;"
 
 $vbar add-css --class date --css "margin-right: 10px;"
 
@@ -77,11 +75,14 @@ $vbar add-block --center --name title --tail-command "xtitle -s"
 
 $vbar add-block --right --name volume --command "[[ \$($scripts_dir/volume_state.sh) = on ]] && icon='🔉' || icon='🔇' && echo \$icon \$($scripts_dir/volume_val.sh)%" --click-command "amixer -q sset Master toggle && $vbar update --name volume" --interval 5
 
-$vbar add-block --right --name battery-icon --text ''
-$vbar add-block --right --name battery --tail-command "while true; do acpi | cut -d, -f2 | sed 's/ //'; sleep 5; done"
+if [[ $(acpi 2>&1) != "No support for device type: power_supply" ]] ; then
+	$vbar add-block --right --name battery-icon --text ''
+	$vbar add-block --right --name battery --tail-command "while true; do acpi | cut -d, -f2 | sed 's/ //'; sleep 5; done"
+fi
+net_type=${scripts_dir}/net_type.sh
 
-$vbar add-block --right --name wireless-icon --text ""
-$vbar add-block --right --name wireless --command "nmcli -t -f TYPE,CONNECTION d | awk -F : '{if(\$2) print(\$2)}'" --interval 5
+$vbar add-block --right --name net-icon --command "test $($net_type) = \"ethernet\" && echo '' || echo ''" --interval 10
+$vbar add-block --right --name net --command "$scripts_dir/net_address.sh \$($scripts_dir/net_device.sh)" --interval 5
 
 $vbar add-block --right --name date --command "date +%d/%m" --interval 60
 $vbar add-block --right --name time --command "date +%H:%M" --interval 1
