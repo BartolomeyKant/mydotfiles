@@ -424,7 +424,7 @@
 	"zenMode.hideActivityBar": false,
 	"zenMode.hideTabs": false,
 	"zenMode.hideStatusBar": false,
-	"editor.fontFamily": "'FreeMonoBold','Droid Sans Mono', 'monospace', 'TerminessTTF Nerd Font'",
+	"editor.fontFamily": "'FreeMonoBold','Droid Sans Mono', 'monospace', 'TerminessTTF Nerd Font','FontAwesome','Font Awesome 5 Free Solid'",
 	"editor.fontLigatures": true,
 	"debug.console.fontFamily": "'Droid Sans Mono', 'monospace', 'TerminessTTF Nerd Font'",
 	"workbench.statusBar.visible": true,
