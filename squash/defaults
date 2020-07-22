@@ -6,7 +6,7 @@
 CURR_DIR="${HOME}/.config/squash"
 CACHE_DIR="${HOME}/.cache/squash"
 THEME_DIR="${HOME}/.config/squash/themes"
-BAR_DIR="${HOME}/squash/bar"
+# BAR_DIR="${HOME}/squash/bar"
 DUNST_PATH="${HOME}/.config/dunst/dunstrc"
 
 # ---- ENABLED MODULES ----

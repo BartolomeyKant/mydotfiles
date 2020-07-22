@@ -1,15 +1,7 @@
 #!/bin/bash
 
-WORK_DIR="${HOME}/.config/squash"
+export WORK_DIR="${HOME}/.config/squash"
 
-# change kitty config
-$WORK_DIR/kitty_change_conf.sh
-
-#change vscode theme
-$WORK_DIR/vscode_change_theme.sh
-
-#setup wallpaper
-$WORK_DIR/set_wallpaper.sh
-
-# change fish colours
-$WORK_DIR/fish_change_colors.fish
+for f in $WORK_DIR/?*.sh ; do
+	[ -x "$f" ] && . "$f" &
+done

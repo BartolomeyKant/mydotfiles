@@ -1,29 +1,33 @@
 #!/bin/bash
 
 # DEFINE COLORS
-BG="#ebeae0"
+BG="#F9F5D7"
 FG="#3c3836"
 
-BLK="#383838"
-RED="#fb4934"
+BLK="#4f4f4f"
+RED="#db5934"
 GRN="#78770a"
-YLW="#c77901"
-BLU="#357578"
-MAG="#b16286"
+YLW="#f7c000"
+BLU="#357588"
+MAG="#b15095"
 CYN="#689d6a"
-WHT="#fbf7f1"
+WHT="#fdf6e3"
 
 BBLK="#282828"
-BRED="#fb4934"
-BGRN="#78770a"
-BYLW="#c77901"
-BBLU="#458588"
-BMAG="#b16286"
+BRED="#ab4934"
+BGRN="#405605"
+BYLW="#dfbf0f"
+BBLU="#456070"
+BMAG="#905070"
 BCYN="#689d6a"
-BWHT="#bbb7b1"
+BWHT="#ddd6c3"
 
 # ROFI OPTIONS
-ACC="${RED}"
+R_HFG="${RED}"
+R_HBG="${BLU}"
+R_BG="${BG}"
+R_FG="${FG}"
+R_ABG="${WHT}"
 
 DUNST_BACK=${BG}
 DUNST_FG=${FG}
@@ -32,7 +36,7 @@ DUNST_FG=${FG}
 WALLPAPER_PATH="$HOME/Pictures/backgrounds/light/current_bg"
 WALLPAPER_STYLE="fill"
 
-VSCODE_THEME="Dusty Light MDN"
+VSCODE_THEME="Gruvbox Light Hard"
 
 BERRY_FBC=${RED:1}
 BERRY_UBC=${CYN:1}
@@ -45,3 +49,20 @@ FISH_CWD="#4585cf"
 FISH_GIT="#9f75cf"
 
 FISH_THEME="#$HOME/.config/squash/fish/light"
+
+color0=$BG
+color1=$RED
+color2=$GRN
+color3=$YLW
+color4=$BLU
+color5=$MAG
+color6=$CYN
+color7=$FG
+color8=$BBLK
+color9=$BRED
+color10=$BGRN
+color11=$BYLW
+color12=$BBLU
+color13=$BMAG
+color14=$BCYN
+color15=$BWHT

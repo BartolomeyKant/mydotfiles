@@ -6,9 +6,8 @@ super + Return
 	terminal
 
 # Lock screen
-#super + a
-#	LockScreen.sh
-
+super + a
+	LockScreen.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -52,10 +51,6 @@ super + control + p
 	/bin/kill ffmpeg
 
 #
-# window manager bindings
-#
-
-#
 # bspwm hotkeys
 #
 
@@ -96,7 +91,10 @@ super + ctrl + {m,x,y,z}
 #
 
 # focus the node in the given direction
-super + {_,shift + ,control+shift+}{Left,Down,Up,Right}
+super + {_,shift + ,control + shift +}{h,j,k,l}
+	bspc node -{f,s,n} {west,south,north,east}
+
+super + {_,shift + ,control + shift +}{Left,Down,Up,Right}
 	bspc node -{f,s,n} {west,south,north,east}
 
 # focus the node for the given path jump
@@ -104,22 +102,8 @@ super + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous node in the current desktop
-super + {_,shift + }Tab
+super + {_,shift + }tab
 	bspc node -f {next,prev}.local
-
-# focus the next/previous desktop in the current monitor
-super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
-
-# focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
-
-# focus the older or newer node in the focus history
-super + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
@@ -130,6 +114,8 @@ super + {_,shift + }{1-9,0}
 #
 
 # preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
 super + ctrl + {Left,Down,Up,Right}
 	bspc node -p {west,south,north,east}
 
@@ -150,9 +136,13 @@ super + ctrl + shift + space
 #
 
 # expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 super + alt + {Left,Down,Up,Right}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
-super + alt + shift + {Left,Down,Up,Right}
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+super + alt + shift + {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
