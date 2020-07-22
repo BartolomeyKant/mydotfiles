@@ -11,6 +11,17 @@
 !/rofi/
 !/zathura/
 !/test/file
+!/Code*/**
+/Code*/*/**
+/Code*/.*
+/Code*/Cook*
+/Code*/Net*
+/Code*/*Sec*
+/Code*/machineid
+/Code*/*.json
+!/Code*/User/**
+/Code*/User/*Stor*/
+# !/Code*/User/snippets/*.json
 
 QtProject.conf
 Trolltech.conf
