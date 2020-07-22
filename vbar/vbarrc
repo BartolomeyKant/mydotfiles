@@ -41,10 +41,10 @@ $vbar add-css --class battery-icon --css "background-color: #232936;"
 
 $vbar add-css --class battery --css "margin-right: 10px;"
 
-$vbar add-css --class volume-icon --css "font-family: \"Font Awesome\";"
+$vbar add-css --class volume-icon --css "font-family: \"Font Awesome 5 Free\";"
 $vbar add-css --class volume-icon --css "background-color: #232936;"
 
-$vbar add-css --class volume --css "margin-right: 10px;"
+$vbar add-css --class volume --css "margin-right: 10px;font-family: \"Font Awesome 5 Free\";"
 
 $vbar add-css --class net-icon --css "font-family: \"Font Awesome 5 Free\";"
 $vbar add-css --class net --css "margin-right: 10px;"
@@ -73,7 +73,7 @@ done
 
 $vbar add-block --center --name title --tail-command "xtitle -s"
 
-$vbar add-block --right --name volume --command "[[ \$($scripts_dir/volume_state.sh) = on ]] && icon='🔉' || icon='🔇' && echo \$icon \$($scripts_dir/volume_val.sh)%" --click-command "amixer -q sset Master toggle && $vbar update --name volume" --interval 5
+$vbar add-block --right --name volume --command "[[ \$($scripts_dir/volume_state.sh) = on ]] && icon='' || icon='' && echo \$icon \$($scripts_dir/volume_val.sh)%" --click-command "amixer -q sset Master toggle && $vbar update --name volume" --interval 5
 
 if [[ $(acpi 2>&1) != "No support for device type: power_supply" ]] ; then
 	$vbar add-block --right --name battery-icon --text ''
@@ -81,8 +81,9 @@ if [[ $(acpi 2>&1) != "No support for device type: power_supply" ]] ; then
 fi
 net_type=${scripts_dir}/net_type.sh
 
-$vbar add-block --right --name net-icon --command "test $($net_type) = \"ethernet\" && echo '' || echo ''" --interval 10
-$vbar add-block --right --name net --command "$scripts_dir/net_address.sh \$($scripts_dir/net_device.sh)" --interval 5
+$vbar add-block --right --name "net-icon" --command "test \$($net_type) = ethernet && echo '' || echo ''"
+sleep 1
+$vbar add-block --right --name "net" --command "$scripts_dir/net_address.sh \$($scripts_dir/net_device.sh) && $vbar update --name net-icon" --interval 5
 
 $vbar add-block --right --name date --command "date +%d/%m" --interval 60
 $vbar add-block --right --name time --command "date +%H:%M" --interval 1
