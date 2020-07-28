@@ -437,7 +437,7 @@
 	"telemetry.enableCrashReporter": false,
 	"telemetry.enableTelemetry": false,
 	"cmake.configureOnOpen": true,
-	"window.zoomLevel": -1,
+	"window.zoomLevel": 0,
 	"c-cpp-flylint.flexelint.enable": false,
 	"c-cpp-flylint.standard": [
 		"c11",
@@ -462,7 +462,6 @@
 	"editor.renderLineHighlight": "all",
 	"workbench.editor.highlightModifiedTabs": true,
 	"mesonbuild.configureOnOpen": false,
-	"editor.fontSize": 12,
 	"debug.console.fontSize": 10,
 	"markdown.preview.fontSize": 10,
 	"go.autocompleteUnimportedPackages": true,
