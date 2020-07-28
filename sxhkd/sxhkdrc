@@ -1,13 +1,13 @@
 super + d
-    RofiLouncher.sh
+    $HOME/.scripts/RofiLouncher.sh
 
 # open terminal
 super + Return
-	terminal
+	$HOME/.scripts/terminal
 
 # Lock screen
 super + a
-	LockScreen.sh
+	$HOME/.scripts/LockScreen.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -37,15 +37,15 @@ XF86AudioMute
 
 # переводчик для выбранного тqекста
 super + r
-	TranslatorOpen.sh ru
+	$HOME/.scripts/TranslatorOpen.sh "ru"
 
 # скриншотелка
 super + p
-	screenshot
+	$HOME/.scripts/screenshot
 ,
 # скринкастелка
 super + shift + p
-	screencast
+	$HOME/.scripts/screencast
 
 super + control + p
 	/bin/kill ffmpeg
