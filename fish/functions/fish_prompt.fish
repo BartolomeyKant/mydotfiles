@@ -14,7 +14,7 @@ function fish_prompt
     set branch (git branch --show-current 2> /dev/null)
 
     if test "$branch" != ""
-        set branch " $branch"
+        set branch " $branch"
         set changes (git status --short | wc -l)
         if test "$changes" != "0"
             set branch "$branch#$changes#"
