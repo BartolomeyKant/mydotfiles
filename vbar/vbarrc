@@ -53,7 +53,9 @@ $vbar add-css --class date --css "margin-right: 10px;"
 
 $vbar add-css --class time --css "margin-right: 0px;"
 
-$vbar add-block --left --name power-off-icon --text ""
+$vbar add-css --class temp --css "background-color: #ff00ff"
+
+$vbar block add --left --name power-off-icon --text ""
 
 $vbar add-menu --name power-off-icon --text "Log off" --command "bspc quit"
 $vbar add-menu --name power-off-icon --text "Shut down" --command "systemctl poweroff"
@@ -68,22 +70,22 @@ for desktop in ${!desktops[@]}; do
 	check_desktop="$scripts_dir/is_desktop.sh $desktop"
 	command="$check_desktop && $vbar add-css --class \"desktop-$desktop\" --css \"background-color: #354555\" || $vbar add-css --class \"desktop-$desktop\" --css \"background-color: #1b202a\" && $check_clients"
 
-	$vbar add-block --left --name "desktop-$desktop" --command "$command" --tail-command "$scripts_dir/desktop_spy.sh | while read r; do $vbar update --name \"desktop-$desktop\" ; done" --click-command "wmctrl -s $desktop"
+	$vbar block add --left --name "desktop-$desktop" --command "$command" --tail-command "$scripts_dir/desktop_spy.sh | while read r; do $vbar update --name \"desktop-$desktop\" ; done" --click-command "wmctrl -s $desktop"
 done
 
-$vbar add-block --center --name title --tail-command "xtitle -s"
+$vbar block add --center --name title --tail-command "xtitle -s"
 
-$vbar add-block --right --name volume --command "[[ \$($scripts_dir/volume_state.sh) = on ]] && icon='' || icon='' && echo \$icon \$($scripts_dir/volume_val.sh)%" --click-command "amixer -q sset Master toggle && $vbar update --name volume" --interval 5
+$vbar block add --right --name volume --command "[[ \$($scripts_dir/volume_state.sh) = on ]] && icon='' || icon='' && echo \$icon \$($scripts_dir/volume_val.sh)%" --click-command "pamixer -t && $vbar update --name volume" --interval 5
 
 if [[ $(acpi 2>&1) != "No support for device type: power_supply" ]] ; then
-	$vbar add-block --right --name battery-icon --text ''
-	$vbar add-block --right --name battery --tail-command "while true; do acpi | cut -d, -f2 | sed 's/ //'; sleep 5; done"
+	$vbar block add --right --name battery-icon --text ''
+	$vbar block add --right --name battery --tail-command "while true; do acpi | cut -d, -f2 | sed 's/ //'; sleep 5; done"
 fi
 net_type=${scripts_dir}/net_type.sh
 
-$vbar add-block --right --name "net-icon" --command "test \$($net_type) = ethernet && echo '' || echo ''"
+$vbar block add --right --name "net-icon" --command "test \$($net_type) = ethernet && echo '' || echo ''"
 sleep 1
-$vbar add-block --right --name "net" --command "$scripts_dir/net_address.sh \$($scripts_dir/net_device.sh) && $vbar update --name net-icon" --interval 5
+$vbar block add --right --name "net" --command "$scripts_dir/net_address.sh \$($scripts_dir/net_device.sh) && $vbar update --name net-icon" --interval 5
 
-$vbar add-block --right --name date --command "date +%d/%m" --interval 60
-$vbar add-block --right --name time --command "date +%H:%M" --interval 1
+$vbar block add --right --name date --command "date +%d/%m" --interval 60
+$vbar block add --right --name time --command "date +%H:%M" --interval 1
