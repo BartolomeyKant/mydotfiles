@@ -1,0 +1,36 @@
+
+# focus desktop
+super + {1-9,0}
+	bspc desktop --focus {1-9,10}
+
+# move window to desktop
+super + shift + {1-9,0}
+	bspc node focused --to-desktop {1-9,10}
+
+# close window
+super + q
+	bspc node focused --kill
+
+# change focus to window
+super + {Up, Down, Left, Right}
+	bspc node --focus {north, south, west, east}
+
+# move window to node
+super + shift + {Up, Down, Left, Right}
+	bspc node focused --to-node {north, south, west, east}
+
+# swap to nodes, move window on other window space
+super + control + {Up, Down, Left, Right}
+	bspc node focused --swap {north, south, west, east}
+
+# change state
+super + {s, t, shift+t, f}
+	bspc node focused --state {~floating, ~tiled, ~pseudo_tiled, ~fullscreen}
+
+# resize window
+#increase
+super + {h, j, k, l}
+	bspc node focused --resize {left -40 0, bottom 0 40, top 0 -40, right 40 0} || bspc node focused --resize {right 40 0 top 0 -40 bottom 0 40 left -40 0}
+# decrease
+super + shift + {h, j, k, l}
+	bspc node focused --resize {left 40 0, bottom 0 -40, top 0 40, right -40 0} || bspc node focused --resize {right -40 0 top 0 40 bottom 0 -40 left 40 0}

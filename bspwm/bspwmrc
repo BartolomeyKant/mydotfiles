@@ -1,6 +1,6 @@
 #! /bin/sh
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 bspc config border_width         5
 bspc config window_gap          12
@@ -9,9 +9,9 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-bspc rule -a term state=pseudo_tiled follow=on
+bspc rule -a term state tiled follow=on
 bspc rule -a DesktopEditors desktop='^6' follow=on
 bspc rule -a Zathura desktop='^6' state=pseudo_tiled follow=on
 bspc rule -a TelegramDesktop desktop='^9' state=pseudo_tiled follow=on -o
-bspc rule -a Firefox desktop='^3' follow=on
+bspc rule -a firefox desktop='^3' follow=on
 bspc rule -a waterfox-current desktop='^3' follow=on
